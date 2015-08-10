@@ -122,7 +122,7 @@ class Api
 }
 
 $server = new Server;
-$server->authentication(['myuser' => 'mypassword']);
+$server->authentication(array('myuser' => 'mypassword'));
 
 // Register the before callback
 $server->before('beforeProcedure');
@@ -147,7 +147,7 @@ Example with positional parameters:
 use JsonRPC\Client;
 
 $client = new Client('http://localhost/server.php');
-$result = $client->execute('addition', [3, 5]);
+$result = $client->execute('addition', array(3, 5));
 
 var_dump($result);
 ```
@@ -160,7 +160,7 @@ Example with named arguments:
 use JsonRPC\Client;
 
 $client = new Client('http://localhost/server.php');
-$result = $client->execute('random', ['end' => 10, 'start' => 1]);
+$result = $client->execute('random', array('end' => 10, 'start' => 1));
 
 var_dump($result);
 ```
@@ -183,7 +183,7 @@ var_dump($result);
 The example above use positional arguments for the request and this one use named arguments:
 
 ```php
-$result = $client->random(['end' => 10, 'start' => 1]);
+$result = $client->random(array('end' => 10, 'start' => 1));
 ```
 
 ### Client batch requests
@@ -198,10 +198,10 @@ use JsonRPC\Client;
 $client = new Client('http://localhost/server.php');
 
 $results = $client->batch()
-                  ->foo(['arg1' => 'bar'])
+                  ->foo(array('arg1' => 'bar'))
                   ->random(1, 100)
                   ->add(4, 3)
-                  ->execute('add', [2, 5])
+                  ->execute('add', array(2, 5))
                   ->send();
 
 print_r($results);
@@ -266,7 +266,7 @@ use JsonRPC\Server;
 $server = new Server;
 
 // IP client restrictions
-$server->allowHosts(['192.168.0.1', '127.0.0.1']);
+$server->allowHosts(array('192.168.0.1', '127.0.0.1'));
 
 // Procedures registration
 
@@ -290,7 +290,7 @@ use JsonRPC\Server;
 $server = new Server;
 
 // List of users to allow
-$server->authentication(['user1' => 'password1', 'user2' => 'password2']);
+$server->authentication(array('user1' => 'password1', 'user2' => 'password2'));
 
 // Procedures registration
 
@@ -321,7 +321,7 @@ use JsonRPC\Server;
 
 $server = new Server;
 $server->setAuthenticationHeader('X-Authentication');
-$server->authentication(['myusername' => 'mypassword']);
+$server->authentication(array('myusername' => 'mypassword'));
 ```
 
 The example above will use the HTTP header `X-Authentication` instead of the standard `Authorization: Basic [BASE64_CREDENTIALS]`.
